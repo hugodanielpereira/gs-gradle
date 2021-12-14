@@ -7,6 +7,8 @@ mainClassName = 'hello.HelloWorld'
 // tag::repositories[]
 repositories { 
     mavenCentral() 
+                username = "${artifactory_user}"
+            password = "${artifactory_password}"
 }
 // end::repositories[]
 
