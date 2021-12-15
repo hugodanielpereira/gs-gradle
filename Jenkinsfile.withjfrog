@@ -1,3 +1,4 @@
+//Needs script approvals inside Jenkins to run .execute()
 node {
   def server = Artifactory.server 'hugodpereira'
   def myGradleContainer = docker.image('gradle:jdk8-alpine')
@@ -7,12 +8,14 @@ node {
   }
   stage('build') {
      myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
-       sh 'cd complete && ./gradlew build'
+       //sh 'cd complete && ./gradlew build'
+       'mkdir complete && cd complete && ./gradlew build'.execute()
      }
   }
   stage('test') {
      myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
-       sh 'cd complete && ./gradlew test'
+       //sh 'cd complete && ./gradlew test'
+       'mkdir complete && cd complete && ./gradlew test'.execute()
      }
   }
   stage('publish') {
