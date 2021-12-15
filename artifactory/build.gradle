@@ -65,8 +65,6 @@ artifactory {
     publish {
         repository {
             repoKey = 'default-gradle-dev-local'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
             maven = true
         }
         defaults {
