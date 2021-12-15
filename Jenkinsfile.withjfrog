@@ -7,16 +7,13 @@ node {
     checkout scm
   }
   stage('build') {
-     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
-       //sh 'cd complete && ./gradlew build'
-       'mkdir complete && cd complete && ./gradlew build'.execute()
+     withEnv("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
+       sh 'cd complete && ./gradlew build'
      }
   }
   stage('test') {
-     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
-       //sh 'cd complete && ./gradlew test'
-       'mkdir complete && cd complete && ./gradlew test'.execute()
-     }
+     withEnv("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
+        sh 'cd complete && ./gradlew test'
   }
   stage('publish') {
     def uploadSpec = """{
